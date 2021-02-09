@@ -1,0 +1,46 @@
+.wrapper {
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .larger-text {
+        font-size: 1.1rem;
+    }
+    .btn {
+        background-color: #308099 ;
+        color: #ffffff;
+        font-size: 1rem;
+        height: fit-content;
+        &:hover {
+            opacity: .8;
+        }
+    }
+    table {
+        overflow-x: auto;
+        overflow-y: hidden;
+        min-width: 500px;
+        margin: auto;
+        width: 100% !important;
+    }
+    th.mat-header-cell {
+        text-align: left;
+        max-width: 300px;
+    }
+
+}
+
+@media only screen and (max-width: 768px) {
+    table {
+        min-width: 50px !important;
+    }
+    .title {
+        font-size: 1.3rem !important;
+    }
+
+    .larger-text {
+        font-size: .8rem !important;
+    }
+    .btn {
+        font-size: .7rem !important;
+    }
+}

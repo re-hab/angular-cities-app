@@ -5,5 +5,10 @@ export const authServiceConstants = {
 };
 
 export const countryServiceConstants = {
-  countries: environment.baseUrl + 'country'
+  countries: environment.baseUrl + 'country',
+  deleteCountry: environment.baseUrl + 'country/',
 };
+
+export class constants {
+public static errorMessage: string = 'Something wrong has happened.';
+}

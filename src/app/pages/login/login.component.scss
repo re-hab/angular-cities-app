@@ -1,15 +1,29 @@
 .wrapper {
     margin: auto;
     padding-top: 10%;
+    width: 50%;
 
     label {
         font-size: 1rem;
         font-weight: 500;
     }
+    .btn {
+        background-color: #308099 ;
+        color: #ffffff;
+        width: 25%;
+        &:hover {
+            opacity: .8;
+        }
+    }
 }
 
 @media only screen and (max-width: 768px) {
     .wrapper {
+        width:75% !important;
         padding-top: 28% !important;
+
+        .btn {
+            width: 50% !important;
+        }
     }
 }

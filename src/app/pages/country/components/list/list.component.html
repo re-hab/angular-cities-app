@@ -1,0 +1,52 @@
+<section class="wrapper container">
+  <div class="d-flex justify-content-between py-5">
+
+  <h1 class="title ">Countries</h1>
+  <button class="btn" mat-raised-button (click)="openDialog()">
+    Add New Country
+    <i class="fa fa-plus text-white ml-2 text-xs-sm d-inline-block mb-1"></i>
+  </button>
+
+</div>
+
+
+  <table mat-table [dataSource]="dataSource" class="country-table" matSort>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="larger-text"> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef class="larger-text"> Details </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="redirectToDetails(element.id)">
+          <mat-icon class="mat-18">reorder</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef class="larger-text"> Update </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" (click)="redirectToUpdate(element)">
+          <mat-icon class="mat-18">system_update</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef class="larger-text"> Delete </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="redirectToDelete(element.id)">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSize]="4" [pageSizeOptions]="[2, 4, 6, 10, 20]">
+  </mat-paginator>
+</section>
