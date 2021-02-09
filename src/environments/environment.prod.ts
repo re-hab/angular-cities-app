@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://taskapi2021.azurewebsites.net/'
+  baseUrl: 'https://taskapi2021.azurewebsites.net/api/'
 };

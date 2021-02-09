@@ -1,9 +1,15 @@
 .wrapper {
     margin: auto;
-    padding-top: 25%;
+    padding-top: 10%;
 
     label {
         font-size: 1rem;
         font-weight: 500;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        padding-top: 28% !important;
     }
 }

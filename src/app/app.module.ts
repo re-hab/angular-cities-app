@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { HttpConfigInterceptor } from 'src/app/core/interceptor/httpconfig.interceptor'
 
 
 @NgModule({
@@ -21,9 +21,15 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: HttpConfigInterceptor, 
+      multi: true 
+   }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { BehaviorSubject } from 'rxjs';
-// import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 
@@ -11,30 +11,50 @@ import { Router } from '@angular/router';
 
 export class AuthManager {
 
-    public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    // public isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
         private authService: AuthService,
-        // private toastr: ToastrService,
+        private toastr: ToastrService,
         private router: Router,
     ) {
     }
 
+    setToken(token: any){
+        localStorage.setItem('TOKEN', token);
+    }
+
+    getToken(){
+        localStorage.getItem('TOKEN')
+    }
+
+    removeToken(){
+        localStorage.removeItem('TOKEN');
+    }
+
+
     login(data: any) {
-        console.log(data)
+
         const requestBody = {
             "Email": data.email,
             "Password": data.password
         }
+
         this.authService.login(requestBody).subscribe((response: any) => {
-            console.log(response)
-            localStorage.setItem('TOKEN', response.token);
-            console.log(localStorage.getItem('TOKEN'))
-            this.isLoggedIn.next(true);
+            this.setToken(response.token);
+            console.log(this.getToken);
+            // this.isLoggedIn.next(true);
+            this.router.navigate(['/country']);
             
 
         }, (error: any) => {
-          
+            this.toastr.error('Please check your right email or password value.');
         });
     }
+
+    logout() {
+        this.removeToken();
+        this.router.navigate(['/']);
+        // this.isLoggedIn.next(false);
+      }
 }

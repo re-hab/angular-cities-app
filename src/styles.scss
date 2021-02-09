@@ -8,3 +8,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-size: 0.9rem;
     line-height: 2rem;
   }
+
+
+  
+.toast-info {
+    color: white;
+    font-size: 1.25rem;
+  }
+  
+  .toast-container {
+    max-width: 90%;
+  
+    .ngx-toastr {
+      max-width: 90%;
+      box-shadow: 0 0 12px #000000 !important;
+    }
+  }
