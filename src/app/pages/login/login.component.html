@@ -1,0 +1,43 @@
+
+<section class="wrapper w-50">
+<form  [formGroup]="loginForm" (ngSubmit)="submit()" autocomplete="off">
+ 
+    <div class="form-group">
+        <label>Email Address</label>
+        <div class="input-group">
+            <input type="email" formControlName="email" class="form-control">
+        </div>
+        <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors">
+            <small *ngIf="loginForm.controls.email.errors.required" class="invalid-feedback">
+                Email Address is required.
+            </small>
+            <small
+                *ngIf="loginForm.controls.email.errors.email || loginForm.controls.email.errors.pattern"
+                class="invalid-feedback">
+                Please enter a valid email address.
+            </small>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <div class="input-group">
+            <input #password formControlName="password" class="form-control" type="password">
+        </div>
+            <div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors">
+                <small *ngIf="loginForm.controls.password.errors.required" class="invalid-feedback">
+                    Password is required.
+                </small>
+                <small
+                    *ngIf="loginForm.controls.password.errors.minlength || loginForm.controls.password.errors.maxlength || loginForm.controls.password.errors.pattern"
+                    class="invalid-feedback">
+                    Please enter valid password.
+                </small>
+            </div>
+    </div>
+    <div class="form-group d-flex justify-content-center">
+        <button [disabled]="loginForm.invalid"
+        mat-raised-button color="primary"
+            class="btn primary w-50" type="submit">Login</button>
+    </div>
+</form>
+</section>
