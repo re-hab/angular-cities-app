@@ -8,10 +8,10 @@ const routes: Routes = [
     import('./pages/login/login.module').then((m) => m.LoginModule),
     
   },
-  { 
-    path: 'angular-cities-app', 
-    redirectTo: '', 
-  },
+  // { 
+  //   path: 'angular-cities-app', 
+  //   redirectTo: '', 
+  // },
   {
     path: 'country',
     loadChildren: () => 
