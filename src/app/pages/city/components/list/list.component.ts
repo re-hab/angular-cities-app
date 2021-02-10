@@ -108,7 +108,6 @@ export class ListComponent implements OnInit {
 
 
   redirectToUpdate(element: City) {
-
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '75%',
       data: { id: element.id, name: element.name, action: 'UPDATE' }
@@ -117,7 +116,7 @@ export class ListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
 
-        this.cityService.updateCity({ id: element.id, name: result }).subscribe((response: any) => {
+        this.cityService.updateCity({ id: element.id, name: result, countryId: element.countryId}).subscribe((response: any) => {
 
           this.dataSource.data.forEach(data => {
             if (data.id == response.id)
