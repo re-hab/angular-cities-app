@@ -6,12 +6,8 @@ const routes: Routes = [
     path: '',
     loadChildren: () => 
     import('./pages/login/login.module').then((m) => m.LoginModule),
-    
+    pathMatch: 'full' 
   },
-  // { 
-  //   path: 'angular-cities-app', 
-  //   redirectTo: '', 
-  // },
   {
     path: 'country',
     loadChildren: () => 
