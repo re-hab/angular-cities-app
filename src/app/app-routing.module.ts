@@ -26,7 +26,17 @@ const routes: Routes = [
     loadChildren: () => 
     import('./pages/city/cities.module').then((m) => m.CitiesModule),
     canActivate: [LoginGuard]
-  }
+  },
+  { 
+    path: 'error', 
+    loadChildren: () => 
+    import('./pages/not-found/not-found.module').then(m => m.NotFoundModule) 
+  },
+  { 
+    path: '**', 
+    redirectTo: 'error', 
+    pathMatch: 'full' 
+  },
 ];
 
 @NgModule({

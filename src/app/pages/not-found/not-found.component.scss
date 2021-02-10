@@ -1,0 +1,34 @@
+.container {
+
+    .desc {
+        padding-top: 10%;
+        margin: auto;
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 1.8rem;
+        }
+    }
+    .btn {
+        background-color: #308099 ;
+        color: #ffffff;
+        width: 25%;
+        &:hover {
+            opacity: .8;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .desc {
+        padding-top: 45% !important;
+        }
+        .btn {
+            width: 55% !important;
+        }
+}
