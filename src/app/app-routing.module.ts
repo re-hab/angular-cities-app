@@ -4,10 +4,13 @@ import { LoginGuard } from './core/guards/login-guard.service'
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     loadChildren: () => 
     import('./pages/login/login.module').then((m) => m.LoginModule),
     
+  },
+  { 
+    path: 'angular-cities-app', 
+    redirectTo: '', 
   },
   {
     path: 'country',
