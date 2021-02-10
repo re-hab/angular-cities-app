@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
   submit(){
 
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value)
       this.authManager.login(this.loginForm.value)
     }
 

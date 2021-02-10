@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Country } from 'src/app/core/models/country';
+import { City } from 'src/app/core/models/city';
+import { CityService } from 'src/app/core/services/city.service';
 import { CountryService } from 'src/app/core/services/country.service';
 import { ToastrService } from 'ngx-toastr';
 import { constants } from 'src/app/core/defines/app.constants';
@@ -8,7 +9,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
-import { Router } from '@angular/router';
+import { CitiesModule } from '../../cities.module';
+import { filter } from 'rxjs/operators';
+import { NavigationEnd, Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -17,30 +20,46 @@ import { Router } from '@angular/router';
 })
 export class ListComponent implements OnInit {
 
-  displayedColumns = ['name', 'details', 'update', 'delete'];
-  dataSource = new MatTableDataSource<Country>([]);
+  displayedColumns = ['name', 'update', 'delete'];
+  dataSource = new MatTableDataSource<City>([]);
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  countryID: any;
+  countryName: string;
+
   constructor(
-    private countryService: CountryService,
+    private cityService: CityService,
     private toastr: ToastrService,
     private dialog: MatDialog,
     private router: Router,
+    private route: ActivatedRoute,
+    private countryService: CountryService
   ) { }
 
   ngOnInit(): void {
-    this.getAllCountries();
+
+    this.route.params.subscribe(params => {
+      this.countryID = params['id'];
+      if (this.countryID) {
+        this.getCountryName(this.countryID);
+        this.getCountryCities(this.countryID);
+      }
+      else
+        this.getAllCities();
+    });
   }
+
+
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
-  getAllCountries() {
-    this.countryService.getCountries().subscribe((response: any) => {
+  getAllCities() {
+    this.cityService.getCities().subscribe((response: any) => {
       this.dataSource.data = response;
 
     }, (error: any) => {
@@ -48,16 +67,34 @@ export class ListComponent implements OnInit {
     });
   }
 
+  getCountryName(id: any) {
+    this.countryService.getCountry(id).subscribe((response: any) => {
+      this.countryName = response.name;
+
+    }, (error: any) => {
+      this.toastr.error(constants.errorMessage);
+    });
+  }
+
+
+  getCountryCities(id: any) {
+    this.cityService.getCitiesofCountry(id).subscribe((response: any) => {
+      this.dataSource.data = response;
+
+    }, (error: any) => {
+      this.toastr.error(constants.errorMessage);
+    });
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '75%',
-      data: { id:'' , name: '', action: 'ADD' }
+      data: { id: '', name: '', action: 'ADD' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.countryService.addCountry(result).subscribe((response: any) => {
+        this.cityService.addCity({ name: result, countryId: +this.countryID }).subscribe((response: any) => {
           let newDataSource = this.dataSource.data.slice();
           newDataSource.push(response)
           this.dataSource.data = newDataSource;
@@ -69,10 +106,8 @@ export class ListComponent implements OnInit {
     });
   }
 
-  redirectToDetails(id: string) {
-    this.router.navigate([`/city/${id}`]);
-  }
-  redirectToUpdate(element: Country) {
+
+  redirectToUpdate(element: City) {
 
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '75%',
@@ -82,13 +117,13 @@ export class ListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
 
-        this.countryService.updateCountry({id: element.id, name: result }).subscribe((response: any) => {
+        this.cityService.updateCity({ id: element.id, name: result }).subscribe((response: any) => {
 
           this.dataSource.data.forEach(data => {
-            if(data.id == response.id)
+            if (data.id == response.id)
               data.name = response.name;
           })
-      
+
         }, (error: any) => {
           this.toastr.error(constants.errorMessage);
         });
@@ -99,7 +134,7 @@ export class ListComponent implements OnInit {
   }
 
   redirectToDelete(id: string) {
-    this.countryService.deleteCountry(id).subscribe((response: any) => {
+    this.cityService.deleteCity(id).subscribe((response: any) => {
 
       let newDataSource = this.dataSource.data.filter(data => data.id != response.id);
       this.dataSource.data = newDataSource;

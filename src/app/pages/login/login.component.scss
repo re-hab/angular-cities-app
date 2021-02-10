@@ -1,4 +1,5 @@
 .wrapper {
+    overflow: hidden;
     margin: auto;
     padding-top: 10%;
     width: 50%;
@@ -20,7 +21,7 @@
 @media only screen and (max-width: 768px) {
     .wrapper {
         width:75% !important;
-        padding-top: 28% !important;
+        padding-top: 35% !important;
 
         .btn {
             width: 50% !important;

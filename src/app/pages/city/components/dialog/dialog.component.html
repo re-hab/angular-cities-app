@@ -1,7 +1,7 @@
 <div class="container">
-    <h1 mat-dialog-title>Country</h1>
+    <h1 mat-dialog-title>City</h1>
     <div mat-dialog-content>
-        <p>Enter Country Name</p>
+        <p>Enter City Name</p>
         <mat-form-field>
             <mat-label>Name</mat-label>
             <input matInput [(ngModel)]="data.name">
@@ -9,7 +9,7 @@
     </div>
     <div mat-dialog-actions>
         <button mat-button (click)="close()">Cancel</button>
-        <button *ngIf="data.action == 'ADD' " mat-button (click)="add()" cdkFocusInitial>Add</button>
+        <button *ngIf="data.action == 'ADD' "   mat-button (click)="add()" cdkFocusInitial>Add</button>
         <button *ngIf="data.action == 'UPDATE'" mat-button (click)="add()" cdkFocusInitial>Update</button>
     </div>
 </div>

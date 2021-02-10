@@ -22,7 +22,7 @@ export class LoginGuard implements CanActivate {
              * Otherwise redirect to Login page
              */
             this.router.navigate(['/']);
-            this.toastr.error('You are not allowed to login.');
+            this.toastr.error('You are not allowed to do this.');
             return false;
         }
     }

@@ -6,8 +6,15 @@ export const authServiceConstants = {
 
 export const countryServiceConstants = {
   countries: environment.baseUrl + 'country',
-  deleteCountry: environment.baseUrl + 'country/',
+  countryById: environment.baseUrl + 'country/',
 };
+
+export const cityServiceConstants = {
+  cities: environment.baseUrl + 'city',
+  cityById: environment.baseUrl + 'city/',
+  citiesofCountry: environment.baseUrl + 'city/getcities/'
+};
+
 
 export class constants {
 public static errorMessage: string = 'Something wrong has happened.';

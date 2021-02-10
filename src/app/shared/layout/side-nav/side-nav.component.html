@@ -1,0 +1,22 @@
+<div id="side-nav" class="sidenav">
+   <a  class="closebtn" (click)="closeNav()">&times;</a>
+   <a routerLink="/country">
+      <i class="fa fa-braille mr-2" aria-hidden="true"></i>
+      Countries
+   </a>
+   <a routerLink="/city">
+      <i class="fa fa-building-o mr-3" aria-hidden="true"></i>
+      Cities
+   </a>
+
+   <a (click)="logOut()">
+      <i class="fa fa-sign-out mr-3" aria-hidden="true"></i>
+      Logout 
+     
+   </a>
+ </div>
+ 
+ <button mat-mini-fab (click)="openNav()" class="mini-fab-btn" >
+   <mat-icon> menu</mat-icon>
+</button>
+ 

@@ -21,6 +21,11 @@ export class CountryService {
     return this.http.get(countryServiceConstants.countries);
   }
 
+  
+  getCountry(id: any) {
+    return this.http.get(countryServiceConstants.countryById+id);
+  }
+
   addCountry(name: string) {
     const requestBody = {
       "Name": name
@@ -39,6 +44,6 @@ export class CountryService {
 
   
   deleteCountry(id: string) {
-    return this.http.delete(countryServiceConstants.deleteCountry + id)
+    return this.http.delete(countryServiceConstants.countryById + id)
   }
 }

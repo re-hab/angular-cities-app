@@ -42,7 +42,6 @@ export class AuthManager {
 
         this.authService.login(requestBody).subscribe((response: any) => {
             this.setToken(response.token);
-            console.log(this.getToken);
             // this.isLoggedIn.next(true);
             this.router.navigate(['/country']);
             

@@ -7,6 +7,8 @@ import { MatIconModule} from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule} from '@angular/material/dialog';
+import { MatSidenavModule} from '@angular/material/sidenav';
+import { MatToolbarModule} from '@angular/material/toolbar';
 
 const materials: any[]=[
   MatCardModule, 
@@ -16,7 +18,9 @@ const materials: any[]=[
   MatIconModule,
   MatSortModule,
   MatPaginatorModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSidenavModule,
+  MatToolbarModule
 ]
 
 
